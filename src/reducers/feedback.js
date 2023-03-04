@@ -7,16 +7,16 @@ const INITIAL_STATE = {
 export function feedbackReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case "GOOD": {
-      return state;
+      return { ...state, good: state.good + 1 };
     }
     case "OK": {
-      return state;
+      return { ...state, ok: state.ok + 1 };
     }
     case "BAD": {
-      return state;
+      return { ...state, bad: state.bad + 1 };
     }
     case "ZERO": {
-      return state;
+      return INITIAL_STATE;
     }
     default: {
       return state;
