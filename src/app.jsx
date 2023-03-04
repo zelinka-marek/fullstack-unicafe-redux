@@ -1,12 +1,9 @@
-import { createStore } from "redux";
-import { feedbackReducer } from "./reducers/feedback";
 import { decimalFormatter, percentageFormatter } from "./utils/format";
 
-const store = createStore(feedbackReducer);
+export function App(props) {
+  const { store } = props;
 
-export function App() {
   const feedback = store.getState();
-
   const allFeedback = feedback.good + feedback.ok + feedback.bad;
   const average = (feedback.good - feedback.bad) / allFeedback;
   const positive = feedback.good / allFeedback;
@@ -15,14 +12,17 @@ export function App() {
     <div>
       <h1>Give feedback</h1>
       <div style={{ display: "flex", gap: 8 }}>
-        <button type="button" onClick={() => {}}>
+        <button type="button" onClick={() => store.dispatch({ type: "GOOD" })}>
           good
         </button>
-        <button type="button" onClick={() => {}}>
+        <button type="button" onClick={() => store.dispatch({ type: "OK" })}>
           ok
         </button>
-        <button type="button" onClick={() => {}}>
+        <button type="button" onClick={() => store.dispatch({ type: "BAD" })}>
           bad
+        </button>
+        <button type="button" onClick={() => store.dispatch({ type: "ZERO" })}>
+          reset stats
         </button>
       </div>
       <h2>Statistics</h2>
